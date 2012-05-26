@@ -26,7 +26,7 @@ class Netpbm < Formula
       s.change_make_var! "CFLAGS_SHLIB", "-fno-common"
       s.change_make_var! "NETPBMLIBTYPE", "dylib"
       s.change_make_var! "NETPBMLIBSUFFIX", "dylib"
-      s.change_make_var! "LDSHLIB", "--shared -o $(SONAME)"
+      s.change_make_var! "LDSHLIB", "--shared -o $(SONAME) -install_name @executable_path/../lib/libnetpbm.$(MAJ).$(MIN).dylib"
       s.change_make_var! "TIFFLIB", "-ltiff"
       s.change_make_var! "JPEGLIB", "-ljpeg"
       s.change_make_var! "PNGLIB", "-lpng"
@@ -36,7 +36,7 @@ class Netpbm < Formula
     end
 
     ENV.deparallelize
-    system "make"
+    system "make CFLAGS=-D_BSD_SOURCE"
     system "make", "package", "pkgdir=#{buildpath}/stage"
     cd 'stage' do
       prefix.install %w{ bin include lib misc }
