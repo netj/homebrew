@@ -11,8 +11,8 @@ class Debianutils < Formula
     system "make"
 
     # some commands are Debian Linux specific and we don't want them, so install specific tools
-    bin.install 'run-parts', 'ischroot', 'tempfile'
+    bin.install 'run-parts', 'ischroot', 'tempfile', 'savelog'
     man1.install 'ischroot.1', 'tempfile.1'
-    man8.install 'run-parts.8'
+    man8.install 'run-parts.8', 'savelog.8'
   end
 end
