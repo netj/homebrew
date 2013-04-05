@@ -16,11 +16,9 @@ class Exiftool < Formula
     (bin + 'exiftool').write <<-EOBIN
 #!/bin/bash
 
-which_exiftool=`which $0`
-dirname_exiftool=$(dirname $which_exiftool)
-readlink_exiftool=$(readlink $which_exiftool)
-dirname_unlinked_exiftool=$(dirname $dirname_exiftool/$readlink_exiftool)
-$dirname_unlinked_exiftool/../libexec/exiftool "$@"
+exiftool=`perl -MCwd -e 'print Cwd::abs_path($ARGV[0])' "$0"`
+dirname_exiftool=`dirname "$exiftool"`
+"$dirname_exiftool"/../libexec/exiftool "$@"
 EOBIN
   end
 
