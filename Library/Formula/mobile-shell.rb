@@ -22,5 +22,7 @@ class MobileShell < Formula
     ENV.O2
     system "./configure", "--prefix=#{prefix}"
     system "make install"
+
+    bash_completion.install 'conf/bash_completion.d/mosh'
   end
 end
